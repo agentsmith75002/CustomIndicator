@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/CustomerIndicatorApp/.vs/CustomerIndicatorApp/v14/.suo
+/CustomerIndicatorApp/bin/x64/Debug
+/CustomerIndicatorApp/obj
+/CustomerIndicatorApp/project.lock.json
