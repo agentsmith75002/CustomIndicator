@@ -1,0 +1,48 @@
+﻿<UserControl x:Name="Me"
+    x:Class="CustomerIndicatorApp.ItemsControlIndicator"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomerIndicatorApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d"
+    d:DesignHeight="50"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <local:VisibleWhenTrue x:Key="VisibleWhenTrue" />
+    </UserControl.Resources>
+    <Grid>
+        <ItemsControl x:Name="ItemsCtrl" 
+                      HorizontalAlignment="Stretch" 
+                      VerticalAlignment="Stretch" 
+                      Margin="0,50" 
+                      ItemsSource="{Binding ItemsSource, UpdateSourceTrigger=PropertyChanged}" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" 
+                                Background="{Binding IndicatorBackground, ElementName=Me, UpdateSourceTrigger=PropertyChanged}" 
+                                Height="40" Margin="0,-45,0,0" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="local:ItemElement">
+                    <Grid Height="30" Width="30" Margin="10,10">
+                        <TextBlock Text="{Binding Index}" Foreground="White" />
+                        <Ellipse RenderTransformOrigin="0.5,0.5"
+                                 Fill="{Binding IndicatorBackColor, ElementName=Me, UpdateSourceTrigger=PropertyChanged}" 
+                                 Visibility="{Binding Selected, Converter={StaticResource VisibleWhenTrue}, UpdateSourceTrigger=PropertyChanged}" >
+                            <Ellipse.RenderTransform>
+                                <CompositeTransform ScaleX="1.25" ScaleY="1.25"/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <!--<Ellipse Stroke="Black" 
+                                 Fill="Red" />-->
+                        <Ellipse Stroke="Black" 
+                                 Fill="{Binding IndicatorForeColor, ElementName=Me, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>
